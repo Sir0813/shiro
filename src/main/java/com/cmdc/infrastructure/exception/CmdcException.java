@@ -7,7 +7,9 @@ import lombok.Data;
  */
 @Data
 public class CmdcException extends RuntimeException {
+
     private int code;
+
     private String message;
 
     public CmdcException(ErrorEnum errorEnum) {

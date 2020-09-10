@@ -7,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -58,12 +57,10 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             getSubject(request, response).login(jwtToken);
         } catch (AuthenticationException e){
             log.info("捕获到身份认证异常");
-                return false;
+            return false;
         }
         return true;
     }
-
-
 
     /**
      * 对跨域提供支持

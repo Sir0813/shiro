@@ -3,17 +3,10 @@ package com.cmdc.infrastructure.util;
 import com.cmdc.infrastructure.common.Constant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.SimpleHash;
-
 import javax.servlet.http.HttpServletRequest;
 
-
-/**
- * @author lixiao
- * @date 2019/7/31 17:11
- */
 @Slf4j
 public class CommonsUtils {
-
 
     /**
      * 手机号正则校验

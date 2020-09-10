@@ -19,20 +19,16 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import javax.servlet.Filter;
 import java.util.*;
 
-/**
- * @author lixiao
- * @date 2019/10/3 15:39
- */
 @Configuration
 public class ShiroConfig {
 
-
     /**
      * @return HashedCredentialsMatcher
+     * 密码匹配器,如果在制作用户密码的时候采取了某种加密规则,匹配用户密码的时候就需要将这个规则告诉shiro
+     * 他将按照此规则加密用户输入的密码然后和数据库中密码做对比
      */
      @Bean("hashedCredentialsMatcher")
      public HashedCredentialsMatcher hashedCredentialsMatcher(){
@@ -46,7 +42,6 @@ public class ShiroConfig {
          return matcher;
      }
 
-
     /**
      * 如果需要密码匹配器则需要进行指定
      * 密码登录Realm
@@ -59,6 +54,11 @@ public class ShiroConfig {
         return passwordRealm;
     }
 
+    /**
+     * 验证码登录
+     * @param matcher
+     * @return
+     */
     @Bean
     public CodeRealm codeRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher){
         CodeRealm codeRealm=new CodeRealm();
@@ -67,7 +67,7 @@ public class ShiroConfig {
     }
 
     /**
-     * jwtRealm
+     * jwtRealm 制作token
      *
      * @return JwtRealm
      */
@@ -105,7 +105,11 @@ public class ShiroConfig {
         return bean;
     }
 
-
+    /**
+     * 此类即将重写,是前文中提到的根据不同场景选取不同realm实现不同校验逻辑的类
+     * 此类启动时机是subject.login()
+     * @return
+     */
     @Bean
     public UserModularRealmAuthenticator userModularRealmAuthenticator() {
         //自己重写的ModularRealmAuthenticator
@@ -116,6 +120,7 @@ public class ShiroConfig {
 
     /**
      * SecurityManager 是 Shiro 架构的核心，通过它来链接Realm和用户(文档中称之为Subject.)
+     * 将各个realm 注入到管理器中
      */
     @Bean
     public SecurityManager securityManager(
@@ -132,19 +137,14 @@ public class ShiroConfig {
         realms.add(jwtRealm);
         realms.add(codeRealm);
         securityManager.setRealms(realms);
-
-        /*
-         * 关闭shiro自带的session，详情见文档
-         */
+        // 关闭shiro自带的session，详情见文档
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
         subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
         securityManager.setSubjectDAO(subjectDAO);
-
         return securityManager;
     }
-
 
     /**
      * 以下Bean开启shiro权限注解

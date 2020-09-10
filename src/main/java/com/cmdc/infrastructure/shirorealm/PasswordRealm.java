@@ -15,20 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 不需要关注PasswordRealm的授权
  * 用户登录之后的权限校验全部发生在token层面，由jwtRealm进行
  * PasswordRealm要做的就是用户的认证
- * @author : wuwensheng
- * @date : 10:57 2020/7/1
  */
 @Slf4j
 public class PasswordRealm extends AuthorizingRealm {
 
     //认为realm所做的身份认证、权限校验都属于最底部的进入接口前的准备 尽量让其贴近领域层
-    @Autowired
+    @Autowired(required = false)
     private UserMapper userMapper;
+
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof CustomizedToken;
     }
-
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -49,6 +47,6 @@ public class PasswordRealm extends AuthorizingRealm {
         }
         Object credentials = user.getPassword();
         //param1:数据库用户 param2:密码 param3:加密所用盐值 param4:当前realm的名称
-        return new SimpleAuthenticationInfo(user, credentials, ByteSource.Util.bytes(user.getUserId()),getName());
+        return new SimpleAuthenticationInfo(user, credentials, ByteSource.Util.bytes(user.getUserId()),this.getName());
     }
 }

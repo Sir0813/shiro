@@ -2,11 +2,6 @@ package com.cmdc.infrastructure.shirotoken;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
-/**
- * @author lixiao
- * @date 2019/7/31 20:54
- */
-
 public class CustomizedToken extends UsernamePasswordToken {
 
     /**

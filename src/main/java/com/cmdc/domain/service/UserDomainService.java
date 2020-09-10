@@ -11,7 +11,6 @@ import com.cmdc.infrastructure.shirotoken.CustomizedToken;
 import com.cmdc.infrastructure.util.CommonsUtils;
 import com.cmdc.infrastructure.util.JwtUtil;
 import com.cmdc.infrastructure.util.RedisUtil;
-import com.cmdc.interfaces.dto.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -19,17 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-/**
- * @author : wuwensheng
- * @date : 13:33 2020/7/1
- */
 @Service
 @Slf4j
 public class UserDomainService {
-    @Autowired
+
+    @Autowired(required = false)
     private UserMapper userMapper;
+
     //todo 其实这里是需要发送事件的
-    @Autowired
+    @Autowired(required = false)
     private UserRoleMapper userRoleMapper;
 
     @Autowired
@@ -47,10 +44,10 @@ public class UserDomainService {
         // 获取Subject
         Subject subject = SecurityUtils.getSubject();
         // 校验userId是否为空
-        if (StringUtils.isEmpty(userId)) throw new CmdcException(ErrorEnum.ACCOUNT_UNUSUAL);
+        // if (StringUtils.isEmpty(userId)) throw new CmdcException(ErrorEnum.ACCOUNT_UNUSUAL);
         // 校验数据库中此user是否存在
         User user = this.selectById(userId);
-        if (user == null) throw new CmdcException(ErrorEnum.ACCOUNT_UNUSUAL);
+        if (user == null) throw new CmdcException(ErrorEnum.USER_NOT_EXISTS);
         // 制作CustomizedToken执行登录
         CustomizedToken customizedToken = new CustomizedToken(userId, passWord, LoginEnum.BY_PASSWORD.getLoginType());
         subject.login(customizedToken);

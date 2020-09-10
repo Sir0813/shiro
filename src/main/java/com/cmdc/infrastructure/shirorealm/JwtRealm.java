@@ -17,20 +17,15 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * @author : wuwensheng
- * @date : 10:59 2020/7/1
- */
 @Slf4j
 public class JwtRealm extends AuthorizingRealm {
 
-    @Autowired
+    @Autowired(required = false)
     private UserMapper userMapper;
+
     @Override
     public boolean supports(AuthenticationToken token) {
        return token instanceof JwtToken;

@@ -1,6 +1,5 @@
 package com.cmdc.infrastructure.shirorealm;
 
-
 import com.cmdc.infrastructure.shirotoken.CustomizedToken;
 import com.cmdc.infrastructure.shirotoken.JwtToken;
 import lombok.extern.slf4j.Slf4j;
@@ -9,14 +8,9 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.realm.Realm;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * @author lixiao
- * @date 2019/7/31 20:48
- */
 @Slf4j
 public class UserModularRealmAuthenticator extends ModularRealmAuthenticator {
 

@@ -2,10 +2,6 @@ package com.cmdc.infrastructure.shirotoken;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
-/**
- * @author lixiao
- * @date 2019/8/5 23:43
- */
 public class JwtToken implements AuthenticationToken {
 
     private String token;

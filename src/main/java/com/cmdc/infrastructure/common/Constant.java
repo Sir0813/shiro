@@ -2,8 +2,6 @@ package com.cmdc.infrastructure.common;
 
 /**
  * 常量类
- * @author lixiao
- * @date 2019/10/3 15:45
  */
 public class Constant {
 
@@ -23,18 +21,23 @@ public class Constant {
      */
     public static final String USER_ID = "userId";
 
-
     /**
      * token请求头名称
      */
     public static final String TOKEN_HEADER_NAME = "authorization";
 
-    /*做token签名的字符串*/
+    /**
+     * 做token签名的字符串
+     */
     public static final String TOKEN_SECRET="abc";
 
-    //token的载荷中盛放的信息 只盛放一个userId 其余什么也不再盛放
+    /**
+     * token的载荷中盛放的信息 只盛放一个userId 其余什么也不再盛放
+     */
     public static final String TOKEN_CLAIM="userId";
 
-    //redis存放用户验证码时给的前缀
+    /**
+     * redis存放用户验证码时给的前缀
+     */
     public static final String REDIS_LOGIN_CODE="LOGIN_CODE:";
 }

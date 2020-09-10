@@ -52,7 +52,7 @@
         GROUP BY u.id
     </select>
 
-    <insert id="insertUser" parameterType="com.cmdc.domain.entity.User">
+    <insert id="insertUser" parameterType="com.cmdc.domain.entity.User" useGeneratedKeys="true" keyProperty="id">
         INSERT into sys_user
         (userId,userName,password,userRemarks)
          VALUES

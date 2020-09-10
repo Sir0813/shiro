@@ -8,7 +8,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.cmdc.infrastructure.common.Constant;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.Date;
 
 /**
@@ -17,6 +16,7 @@ import java.util.Date;
  */
 @Slf4j
 public class JwtUtil {
+
     /**
      * 校验token是否正确
      *
@@ -39,7 +39,6 @@ public class JwtUtil {
         }
     }
 
-
     /**
      * 获得token中的信息无需secret解密也能获得
      * @return token中包含的用户名
@@ -54,8 +53,6 @@ public class JwtUtil {
     }
 
     /**
-     *
-
      * @param userId   用户id
      * @param secret   制作此token的签名依据
      * @return 加密的token
@@ -67,6 +64,5 @@ public class JwtUtil {
                 .withClaim(Constant.TOKEN_CLAIM, userId)
                 .withExpiresAt(date)
                 .sign(algorithm);
-
     }
 }

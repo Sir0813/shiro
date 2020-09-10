@@ -13,18 +13,15 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author : wuwensheng
- * @date : 17:08 2020/7/2
- */
 @Slf4j
 public class CodeRealm extends AuthorizingRealm {
 
-    @Autowired
+    @Autowired(required = false)
     private UserMapper userMapper;
 
     @Autowired
     private RedisUtil redisUtil;
+
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof CustomizedToken;
