@@ -58,6 +58,7 @@ public class JwtRealm extends AuthorizingRealm {
         // 解密获得phone，用于和数据库进行对比
         String userId = JwtUtil.getUserId(token);
         if (userId == null) {
+            log.error("身份无效!!!!");
             throw new AuthenticationException(ErrorEnum.TOKEN_EXCEPTION.getMsg());
         }
         User user = userMapper.selectById(userId);

@@ -43,6 +43,12 @@ public class UserFacade {
         return new JsonResult();
     }
 
+    @GetMapping(value = "/v1.0/shiro/getData")
+    public JsonResult getData() throws Exception {
+        log.info("访问getUser接口成功");
+        return new JsonResult();
+    }
+
     @PostMapping(value = "/user/passwordLogin",name = "用户密码登录")
     public JsonResult passwordLogin(@RequestBody @Valid  PassWordLoginDTO passWordLoginDTO){
         log.info("传递的请求参数:{}",passWordLoginDTO);
