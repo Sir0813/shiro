@@ -35,7 +35,6 @@ public class UserFacade {
         return new JsonResult();
     }
 
-
     @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/v1.0/shiro/getUser")
     public JsonResult getUser() throws Exception {
@@ -43,9 +42,17 @@ public class UserFacade {
         return new JsonResult();
     }
 
+    // 需要token才能访问
     @GetMapping(value = "/v1.0/shiro/getData")
     public JsonResult getData() throws Exception {
-        log.info("访问getUser接口成功");
+        log.info("访问getData接口成功");
+        return new JsonResult();
+    }
+
+    // 不需要登录也能访问
+    @GetMapping(value = "/v2.0/shiro/getTest")
+    public JsonResult getTest() throws Exception {
+        log.info("访问getTest接口成功");
         return new JsonResult();
     }
 

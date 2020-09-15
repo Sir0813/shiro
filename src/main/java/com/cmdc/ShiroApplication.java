@@ -3,6 +3,7 @@ package com.cmdc;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 流程:
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 //扫描下面的接口生成代理实现类
 @MapperScan("com.cmdc.domain.mapper")
+@EnableTransactionManagement
 public class ShiroApplication {
 
     public static void main(String[] args) {

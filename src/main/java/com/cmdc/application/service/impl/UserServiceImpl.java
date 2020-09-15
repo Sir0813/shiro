@@ -2,14 +2,12 @@ package com.cmdc.application.service.impl;
 
 import com.cmdc.application.service.UserService;
 import com.cmdc.domain.service.UserDomainService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Slf4j
 @Order(0)
 public class UserServiceImpl implements UserService{
 

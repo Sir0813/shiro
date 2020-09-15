@@ -96,6 +96,7 @@ public class ShiroConfig {
         filterMap.put("/user/passwordLogin", "anon");
         filterMap.put("/user/verificationCodeLogin", "anon");
         filterMap.put("/user/register", "anon");
+        filterMap.put("/v2.0/shiro/**", "anon");
         bean.setFilterChainDefinitionMap(filterMap);
         Map<String, Filter> filter = new HashMap<>(1);
         filter.put("jwt", new JwtFilter());

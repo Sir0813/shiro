@@ -36,6 +36,8 @@ public class JwtUtil {
             return true;
         } catch (JWTVerificationException exception) {
             return false;
+        } catch (IllegalArgumentException exception) {
+            return false;
         }
     }
 
@@ -48,6 +50,10 @@ public class JwtUtil {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim(Constant.TOKEN_CLAIM).asString();
         } catch (JWTDecodeException e) {
+            log.error("token 参数异常");
+            return null;
+        } catch (IllegalArgumentException e) {
+            log.error("token 参数异常");
             return null;
         }
     }
